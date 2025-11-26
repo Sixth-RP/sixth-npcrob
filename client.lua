@@ -165,3 +165,25 @@ function DrawText3D(x, y, z, text)
         DrawRect(_x, _y + 0.0125, 0.015 + factor, 0.03, 41, 11, 41, 68)
     end
 end
+RegisterCommand('robberylog', function(source, args, rawCommand)
+    local src = source
+    
+    if src == 0 then -- Console
+        print("^3=== NPC Robbery Log ===^0")
+        for k, v in pairs(robberyLog) do
+            print("Player: " .. v.player .. " | Amount: $" .. v.amount .. " | Time: " .. v.time)
+        end
+    else
+        -- Check if player is admin (you'll need to implement your admin check)
+        -- For now, only console can use this
+        print("^1This command can only be used from console^0")
+    end
+end, false)
+
+-- Clear robbery log command
+RegisterCommand('clearrobberylog', function(source, args, rawCommand)
+    if source == 0 then
+        robberyLog = {}
+        print("^2Robbery log cleared!^0")
+    end
+end, false)
